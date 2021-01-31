@@ -161,9 +161,9 @@ def day_check(message):
                 if call.message:
                     if call.data == 'mon':
                         if now_week_number % 2 == 0:
-                            bot.send_message(call.message.chat.id, rasp.Chet[0] + ' ' + now_week_number, parse_mode='HTML')
+                            bot.send_message(call.message.chat.id, rasp.Chet[0], parse_mode='HTML')
                         else:
-                            bot.send_message(call.message.chat.id, rasp.Nechet[0] + ' ' + now_week_number, parse_mode='HTML')
+                            bot.send_message(call.message.chat.id, rasp.Nechet[0], parse_mode='HTML')
                         rasp_day = "понедельник"
 
                     elif call.data == 'tue':
