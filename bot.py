@@ -130,7 +130,7 @@ def day_check(message):
 
     elif message.text == 'На неделю':
 
-        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] - 1
+        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1]
 
         today_day_number = datetime.datetime.today().weekday()
 
@@ -148,7 +148,7 @@ def day_check(message):
         sm_id = random.randint(0, 4)
 
         if today_day_number > 4:
-            now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1]
+            now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] + 1
             bot.send_message(message.chat.id, 'Выбери нужный день следующей недели', reply_markup=other_day_markup)
 
         else:
@@ -161,9 +161,9 @@ def day_check(message):
                 if call.message:
                     if call.data == 'mon':
                         if now_week_number % 2 == 0:
-                            bot.send_message(call.message.chat.id, rasp.Chet[0], parse_mode='HTML')
+                            bot.send_message(call.message.chat.id, rasp.Chet[0] + ' ' + now_week_number, parse_mode='HTML')
                         else:
-                            bot.send_message(call.message.chat.id, rasp.Nechet[0], parse_mode='HTML')
+                            bot.send_message(call.message.chat.id, rasp.Nechet[0] + ' ' + now_week_number, parse_mode='HTML')
                         rasp_day = "понедельник"
 
                     elif call.data == 'tue':
