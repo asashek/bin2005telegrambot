@@ -95,7 +95,7 @@ def day_check(message):
     if message.text == 'Сегодня':
         bot.send_message(message.chat.id, 'Расписание на сегодня')
 
-        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] - 35
+        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1]
         today_day_number = datetime.datetime.today().weekday()
         if today_day_number > 6:
             today_day_number -= 7
@@ -112,7 +112,7 @@ def day_check(message):
     elif message.text == 'Завтра':
         bot.send_message(message.chat.id, 'Расписание на завтра')
 
-        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] - 35
+        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1]
         today_day_number = datetime.datetime.today().weekday() + 1
 
         if today_day_number > 6:
