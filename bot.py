@@ -95,7 +95,7 @@ def day_check(message):
     if message.text == 'Сегодня':
         bot.send_message(message.chat.id, 'Расписание на сегодня')
 
-        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] - 35
+        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1]
         today_day_number = datetime.datetime.today().weekday()
         if today_day_number > 6:
             today_day_number -= 7
@@ -112,7 +112,7 @@ def day_check(message):
     elif message.text == 'Завтра':
         bot.send_message(message.chat.id, 'Расписание на завтра')
 
-        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] - 35
+        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1]
         today_day_number = datetime.datetime.today().weekday() + 1
 
         if today_day_number > 6:
@@ -130,7 +130,7 @@ def day_check(message):
 
     elif message.text == 'На неделю':
 
-        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] - 35
+        now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1]
 
         today_day_number = datetime.datetime.today().weekday()
 
@@ -148,7 +148,7 @@ def day_check(message):
         sm_id = random.randint(0, 4)
 
         if today_day_number > 4:
-            now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] - 35 + 1
+            now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] + 1
             bot.send_message(message.chat.id, 'Выбери нужный день следующей недели', reply_markup=other_day_markup)
 
         else:
@@ -195,7 +195,7 @@ def day_check(message):
                         rasp_day = "пятницу"
 
 
-                    start(message)
+            start(message)
 
             except Exception as e:
                 print(repr(e))
