@@ -195,7 +195,7 @@ def day_check(message):
                         rasp_day = "пятницу"
 
 
-                    start(message)
+            start(message)
 
             except Exception as e:
                 print(repr(e))
