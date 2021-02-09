@@ -149,10 +149,12 @@ def day_check(message):
 
         if today_day_number > 4:
             now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] + 1
-            bot.send_message(message.chat.id, 'Выбери нужный день следующей недели', reply_markup=other_day_markup)
+            bot.send_message(message.chat.id, 'Выбери нужный день следующей недели', reply_markup=types.ReplyKeyboardRemove())
+            bot.send_message(message.chat.id, 'День недели', reply_markup=other_day_markup)
 
         else:
-            bot.send_message(message.chat.id, 'Выбери нужный день этой недели', reply_markup=other_day_markup)
+            bot.send_message(message.chat.id, 'Выбери нужный день этой недели', reply_markup=types.ReplyKeyboardRemove())
+            bot.send_message(message.chat.id, 'День недели', reply_markup=other_day_markup)
 
         @bot.callback_query_handler(func=lambda call: True)
         def callback_inline(call):
