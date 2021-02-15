@@ -141,7 +141,7 @@ def day_check(message):
         wed = types.InlineKeyboardButton('Среда', callback_data='wed')
         thu = types.InlineKeyboardButton('Четверг', callback_data='thu')
         fri = types.InlineKeyboardButton('Пятница', callback_data='fri')
-        fri = types.InlineKeyboardButton('Суббота', callback_data='sat')
+        sat = types.InlineKeyboardButton('Суббота', callback_data='sat')
         other_day_markup.add(mon, tue, wed, thu, fri, sat)
 
         sm = ['(ノಠ益ಠ)ノ彡', '╭∩╮(Ο_Ο)╭∩╮', '(ಠ_ಠ)┌∩┐', 'ε(´סּ︵סּ`)з', 'Загрузка... ████████████] 99%']
