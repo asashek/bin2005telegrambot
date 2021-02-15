@@ -99,7 +99,7 @@ def day_check(message):
         today_day_number = datetime.datetime.today().weekday()
         if today_day_number > 6:
             today_day_number -= 7
-        if today_day_number == 5 or today_day_number == 6:
+        if  today_day_number == 6:
             bot.send_message(message.chat.id, '<b><i>Это выходной день, пар нет</i></b>', parse_mode='HTML')
         else:
             if now_week_number % 2 == 0:
@@ -118,7 +118,7 @@ def day_check(message):
         if today_day_number > 6:
             today_day_number -= 7
             now_week_number += 1
-        if today_day_number == 5 or today_day_number == 6:
+        if today_day_number == 6:
             bot.send_message(message.chat.id, '<b><i>Это выходной день, пар нет</i></b>', parse_mode='HTML')
         else:
             if now_week_number % 2 == 0:
@@ -141,13 +141,14 @@ def day_check(message):
         wed = types.InlineKeyboardButton('Среда', callback_data='wed')
         thu = types.InlineKeyboardButton('Четверг', callback_data='thu')
         fri = types.InlineKeyboardButton('Пятница', callback_data='fri')
-        other_day_markup.add(mon, tue, wed, thu, fri)
+        fri = types.InlineKeyboardButton('Суббота', callback_data='sat')
+        other_day_markup.add(mon, tue, wed, thu, fri, sat)
 
         sm = ['(ノಠ益ಠ)ノ彡', '╭∩╮(Ο_Ο)╭∩╮', '(ಠ_ಠ)┌∩┐', 'ε(´סּ︵סּ`)з', 'Загрузка... ████████████] 99%']
 
         sm_id = random.randint(0, 4)
 
-        if today_day_number > 4:
+        if today_day_number > 5:
             now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] + 1
             bot.send_message(message.chat.id, 'Выбери нужный день следующей недели', reply_markup=types.ReplyKeyboardRemove())
             bot.send_message(message.chat.id, 'День недели', reply_markup=other_day_markup)
@@ -195,6 +196,13 @@ def day_check(message):
                         else:
                             bot.send_message(call.message.chat.id, rasp.Nechet[4], parse_mode='HTML')
                         rasp_day = "пятницу"
+
+                    elif call.data == 'sat':
+                        if now_week_number % 2 == 0:
+                            bot.send_message(call.message.chat.id, rasp.Chet[5], parse_mode='HTML')
+                        else:
+                            bot.send_message(call.message.chat.id, rasp.Nechet[5], parse_mode='HTML')
+                        rasp_day = "субботу"
 
 
                 start(message)
