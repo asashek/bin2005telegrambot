@@ -62,8 +62,7 @@ def action_pick(message):
     elif message.text == 'Учебная литература':
         literature_pick = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
         english = types.KeyboardButton('Английский язык')
-        it = types.KeyboardButton('Информатика')
-        history = types.KeyboardButton('История')
+        ikg = types.KeyboardButton('ИКГ')
         math = types.KeyboardButton('Математика')
         physics = types.KeyboardButton('Физика')
 
@@ -233,19 +232,11 @@ def literature(message):
             book = open('static/literature/physics/' + files[i], 'rb')
             bot.send_document(message.chat.id, book)
 
-    elif message.text == 'История':
-        files = os.listdir(path="./static/literature/history")
+    elif message.text == 'ИКГ':
+        files = os.listdir(path="./static/literature/ikg")
         for i in range(len(files)):
             book = open('static/literature/history/' + files[i], 'rb')
             bot.send_document(message.chat.id, book)
-        bot.send_message(message.chat.id, 'Ответы на вопросы вписывать в файл на Google диске ---> https://docs.google.com/document/d/1mgnu6BG2Z5AubxvU3_4T89TQDE2MGEEj0aUNcUsRZe8/edit?usp=sharing')
-
-    elif message.text == 'Информатика':
-        files = os.listdir(path="./static/literature/it")
-        for i in range(len(files)):
-            book = open('static/literature/it/' + files[i], 'rb')
-            bot.send_document(message.chat.id, book)
-
     start(message)
 
 
