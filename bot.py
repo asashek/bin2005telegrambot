@@ -66,7 +66,7 @@ def action_pick(message):
         math = types.KeyboardButton('Математика')
         physics = types.KeyboardButton('Физика')
 
-        literature_pick.add(english, math, physics, history, it)
+        literature_pick.add(english, math, physics, ikg)
 
         literature_pick_send = bot.send_message(message.chat.id, '<b>Выбери нужный предмет</b>', reply_markup=literature_pick,parse_mode="HTML")
 
