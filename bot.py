@@ -235,7 +235,7 @@ def literature(message):
     elif message.text == 'ИКГ':
         files = os.listdir(path="./static/literature/ikg")
         for i in range(len(files)):
-            book = open('static/literature/history/' + files[i], 'rb')
+            book = open('static/literature/ikg/' + files[i], 'rb')
             bot.send_document(message.chat.id, book)
     start(message)
 
