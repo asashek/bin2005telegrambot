@@ -30,15 +30,7 @@ def start(message):
     rasp = types.KeyboardButton('Расписание пар')
     exam_rasp = types.KeyboardButton('Расписание экзаменов')
     books = types.KeyboardButton('Учебная литература')
-<<<<<<< HEAD
-
     action_pick.add(rasp, books, exam_rasp)
-=======
-    top_hyi = types.KeyboardButton('ТОП ЧЛЕН(вариант для Дениса)')
-    tok_gul = types.KeyboardButton('Special для Лёши♥')
-
-    action_pick.add(rasp, books, exam_rasp, top_hyi, tok_gul)
->>>>>>> 1acde11fb84570e52377e2f2d0a5a8b03cd51b86
 
     bot.send_message(message.chat.id, 'Выбери то, что хочешь увидеть',
                      reply_markup=action_pick, parse_mode='HTML')
