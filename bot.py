@@ -30,8 +30,15 @@ def start(message):
     rasp = types.KeyboardButton('Расписание пар')
     exam_rasp = types.KeyboardButton('Расписание экзаменов')
     books = types.KeyboardButton('Учебная литература')
+<<<<<<< HEAD
 
     action_pick.add(rasp, books, exam_rasp)
+=======
+    top_hyi = types.KeyboardButton('ТОП ЧЛЕН(вариант для Дениса)')
+    tok_gul = types.KeyboardButton('Special для Лёши♥')
+
+    action_pick.add(rasp, books, exam_rasp, top_hyi, tok_gul)
+>>>>>>> 1acde11fb84570e52377e2f2d0a5a8b03cd51b86
 
     bot.send_message(message.chat.id, 'Выбери то, что хочешь увидеть',
                      reply_markup=action_pick, parse_mode='HTML')
@@ -73,6 +80,20 @@ def action_pick(message):
     elif message.text == 'Расписание экзаменов':
         bot.send_message(message.chat.id, exams_rasp.exam_rasp, parse_mode='HTML')
 
+<<<<<<< HEAD
+=======
+    elif message.text == 'ТОП ЧЛЕН(вариант для Дениса)':
+        files = os.listdir(path="./static/videos")
+        rand_video = random.randint(0, 7)
+        print(files[rand_video])
+
+        bot.send_video(message.chat.id, open('static/videos/' + files[rand_video], 'rb'), supports_streaming=False)
+
+    elif message.text == 'Special для Лёши♥':
+        bot.send_video(message.chat.id, open('static/opening.mp4', 'rb'), supports_streaming=False)
+
+
+>>>>>>> 1acde11fb84570e52377e2f2d0a5a8b03cd51b86
 
 def day_check(message):
     today = str(datetime.date.today())
