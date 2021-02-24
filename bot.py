@@ -30,10 +30,8 @@ def start(message):
     rasp = types.KeyboardButton('Расписание пар')
     exam_rasp = types.KeyboardButton('Расписание экзаменов')
     books = types.KeyboardButton('Учебная литература')
-    top_hyi = types.KeyboardButton('ТОП ЧЛЕН(вариант для Дениса)')
-    tok_gul = types.KeyboardButton('Special для Лёши♥')
 
-    action_pick.add(rasp, books, exam_rasp, top_hyi, tok_gul)
+    action_pick.add(rasp, books, exam_rasp)
 
     bot.send_message(message.chat.id, 'Выбери то, что хочешь увидеть',
                      reply_markup=action_pick, parse_mode='HTML')
@@ -62,12 +60,11 @@ def action_pick(message):
     elif message.text == 'Учебная литература':
         literature_pick = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
         english = types.KeyboardButton('Английский язык')
-        it = types.KeyboardButton('Информатика')
-        history = types.KeyboardButton('История')
+        ikg = types.KeyboardButton('ИКГ')
         math = types.KeyboardButton('Математика')
         physics = types.KeyboardButton('Физика')
 
-        literature_pick.add(english, math, physics, history, it)
+        literature_pick.add(english, math, physics, ikg)
 
         literature_pick_send = bot.send_message(message.chat.id, '<b>Выбери нужный предмет</b>', reply_markup=literature_pick,parse_mode="HTML")
 
@@ -75,17 +72,6 @@ def action_pick(message):
 
     elif message.text == 'Расписание экзаменов':
         bot.send_message(message.chat.id, exams_rasp.exam_rasp, parse_mode='HTML')
-
-    elif message.text == 'ТОП ЧЛЕН(вариант для Дениса)':
-        files = os.listdir(path="./static/videos")
-        rand_video = random.randint(0, 7)
-        print(files[rand_video])
-
-        bot.send_video(message.chat.id, open('static/videos/' + files[rand_video], 'rb'), supports_streaming=False)
-
-    elif message.text == 'Special для Лёши♥':
-        bot.send_video(message.chat.id, open('static/opening.mp4', 'rb'), supports_streaming=False)
-
 
 
 def day_check(message):
@@ -99,7 +85,7 @@ def day_check(message):
         today_day_number = datetime.datetime.today().weekday()
         if today_day_number > 6:
             today_day_number -= 7
-        if today_day_number == 5 or today_day_number == 6:
+        if  today_day_number == 6:
             bot.send_message(message.chat.id, '<b><i>Это выходной день, пар нет</i></b>', parse_mode='HTML')
         else:
             if now_week_number % 2 == 0:
@@ -118,7 +104,7 @@ def day_check(message):
         if today_day_number > 6:
             today_day_number -= 7
             now_week_number += 1
-        if today_day_number == 5 or today_day_number == 6:
+        if today_day_number == 6:
             bot.send_message(message.chat.id, '<b><i>Это выходной день, пар нет</i></b>', parse_mode='HTML')
         else:
             if now_week_number % 2 == 0:
@@ -141,18 +127,21 @@ def day_check(message):
         wed = types.InlineKeyboardButton('Среда', callback_data='wed')
         thu = types.InlineKeyboardButton('Четверг', callback_data='thu')
         fri = types.InlineKeyboardButton('Пятница', callback_data='fri')
-        other_day_markup.add(mon, tue, wed, thu, fri)
+        sat = types.InlineKeyboardButton('Суббота', callback_data='sat')
+        other_day_markup.add(mon, tue, wed, thu, fri, sat)
 
         sm = ['(ノಠ益ಠ)ノ彡', '╭∩╮(Ο_Ο)╭∩╮', '(ಠ_ಠ)┌∩┐', 'ε(´סּ︵סּ`)з', 'Загрузка... ████████████] 99%']
 
         sm_id = random.randint(0, 4)
 
-        if today_day_number > 4:
+        if today_day_number > 5:
             now_week_number = datetime.date(int(today[0]), int(today[1]), int(today[2])).isocalendar()[1] + 1
-            bot.send_message(message.chat.id, 'Выбери нужный день следующей недели', reply_markup=other_day_markup)
+            bot.send_message(message.chat.id, 'Выбери нужный день следующей недели', reply_markup=types.ReplyKeyboardRemove())
+            bot.send_message(message.chat.id, 'День недели', reply_markup=other_day_markup)
 
         else:
-            bot.send_message(message.chat.id, 'Выбери нужный день этой недели', reply_markup=other_day_markup)
+            bot.send_message(message.chat.id, 'Выбери нужный день этой недели', reply_markup=types.ReplyKeyboardRemove())
+            bot.send_message(message.chat.id, 'День недели', reply_markup=other_day_markup)
 
         @bot.callback_query_handler(func=lambda call: True)
         def callback_inline(call):
@@ -194,6 +183,13 @@ def day_check(message):
                             bot.send_message(call.message.chat.id, rasp.Nechet[4], parse_mode='HTML')
                         rasp_day = "пятницу"
 
+                    elif call.data == 'sat':
+                        if now_week_number % 2 == 0:
+                            bot.send_message(call.message.chat.id, rasp.Chet[5], parse_mode='HTML')
+                        else:
+                            bot.send_message(call.message.chat.id, rasp.Nechet[5], parse_mode='HTML')
+                        rasp_day = "субботу"
+
 
                 start(message)
 
@@ -223,19 +219,11 @@ def literature(message):
             book = open('static/literature/physics/' + files[i], 'rb')
             bot.send_document(message.chat.id, book)
 
-    elif message.text == 'История':
-        files = os.listdir(path="./static/literature/history")
+    elif message.text == 'ИКГ':
+        files = os.listdir(path="./static/literature/ikg")
         for i in range(len(files)):
-            book = open('static/literature/history/' + files[i], 'rb')
+            book = open('static/literature/ikg/' + files[i], 'rb')
             bot.send_document(message.chat.id, book)
-        bot.send_message(message.chat.id, 'Ответы на вопросы вписывать в файл на Google диске ---> https://docs.google.com/document/d/1mgnu6BG2Z5AubxvU3_4T89TQDE2MGEEj0aUNcUsRZe8/edit?usp=sharing')
-
-    elif message.text == 'Информатика':
-        files = os.listdir(path="./static/literature/it")
-        for i in range(len(files)):
-            book = open('static/literature/it/' + files[i], 'rb')
-            bot.send_document(message.chat.id, book)
-
     start(message)
 
 
