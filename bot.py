@@ -106,9 +106,9 @@ def day_check(message):
             bot.send_message(message.chat.id, '<b><i>Это выходной день, пар нет</i></b>', parse_mode='HTML')
         else:
             if now_week_number % 2 == 0:
-                bot.send_message(message.chat.id, rasp.Chet[today_day_number], parse_mode='HTML')
+                bot.send_message(message.chat.id, rasp.Chet[today_day_number], parse_mode='HTML', reply_markup=types.ReplyKeyboardRemove())
             else:
-                bot.send_message(message.chat.id, rasp.Nechet[today_day_number], parse_mode='HTML')
+                bot.send_message(message.chat.id, rasp.Nechet[today_day_number], parse_mode='HTML', reply_markup=types.ReplyKeyboardRemove())
 
         start(message)
 
